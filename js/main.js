@@ -108,6 +108,64 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   startSlider();
 
+  /* ---- Lightbox: flota refrigerada (NPR, FVR, FVZ) ---- */
+  var refrigeradoImages = [
+    { src: 'assets/img/refrigerado/npr.png', label: 'Isuzu NPR' },
+    { src: 'assets/img/refrigerado/fvr.png', label: 'Isuzu FVR' },
+    { src: 'assets/img/refrigerado/fvz.png', label: 'Isuzu FVZ' }
+  ];
+  var cardRefrigerado = document.getElementById('cardRefrigerado');
+  var lightbox = document.getElementById('lightbox');
+
+  if (cardRefrigerado && lightbox) {
+    var lightboxImg = document.getElementById('lightboxImg');
+    var lightboxCaption = document.getElementById('lightboxCaption');
+    var lightboxClose = document.getElementById('lightboxClose');
+    var lightboxBackdrop = document.getElementById('lightboxBackdrop');
+    var lightboxPrev = document.getElementById('lightboxPrev');
+    var lightboxNext = document.getElementById('lightboxNext');
+    var lightboxIndex = 0;
+
+    function showLightboxImage(index) {
+      lightboxIndex = (index + refrigeradoImages.length) % refrigeradoImages.length;
+      var item = refrigeradoImages[lightboxIndex];
+      lightboxImg.src = item.src;
+      lightboxImg.alt = item.label;
+      lightboxCaption.textContent = item.label + ' — ' + (lightboxIndex + 1) + ' / ' + refrigeradoImages.length;
+    }
+
+    function openLightbox(index) {
+      showLightboxImage(index);
+      lightbox.hidden = false;
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.hidden = true;
+      document.body.style.overflow = '';
+    }
+
+    cardRefrigerado.addEventListener('click', function () { openLightbox(0); });
+    cardRefrigerado.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openLightbox(0);
+      }
+    });
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxBackdrop.addEventListener('click', closeLightbox);
+    lightboxPrev.addEventListener('click', function () { showLightboxImage(lightboxIndex - 1); });
+    lightboxNext.addEventListener('click', function () { showLightboxImage(lightboxIndex + 1); });
+
+    document.addEventListener('keydown', function (e) {
+      if (lightbox.hidden) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') showLightboxImage(lightboxIndex - 1);
+      if (e.key === 'ArrowRight') showLightboxImage(lightboxIndex + 1);
+    });
+  }
+
   /* ---- Formulario de contacto (abre el correo con el mensaje listo) ---- */
   var contactForm = document.getElementById('contactForm');
   if (contactForm) {
