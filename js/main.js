@@ -108,6 +108,33 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   startSlider();
 
+  /* ---- Formulario de contacto (abre el correo con el mensaje listo) ---- */
+  var contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      var name = document.getElementById('cfName').value.trim();
+      var email = document.getElementById('cfEmail').value.trim();
+      var subject = document.getElementById('cfSubject').value;
+      var message = document.getElementById('cfMessage').value.trim();
+
+      if (!name || !email || !message) return;
+
+      var body =
+        'Nombre: ' + name + '\n' +
+        'Correo: ' + email + '\n\n' +
+        message;
+
+      var mailtoUrl =
+        'mailto:comercial@transcarnes.com' +
+        '?subject=' + encodeURIComponent(subject + ' - ' + name) +
+        '&body=' + encodeURIComponent(body);
+
+      window.location.href = mailtoUrl;
+    });
+  }
+
   /* ---- Reveal on scroll ---- */
   var revealEls = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
