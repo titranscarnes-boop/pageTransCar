@@ -193,7 +193,7 @@
           <li><span class="check">&#10003;</span> Flota especializada por tipo de carga</li>
         </ul>
         <div class="about-actions">
-          <a href="#contacto" class="btn btn-dark">Solicita tu manifiesto</a>
+          <a href="mailto:comercial@transcarnes.com?subject=Solicitud%20de%20manifiesto" class="btn btn-dark">Solicita tu manifiesto</a>
         </div>
       </div>
     </div>
@@ -299,12 +299,41 @@
           </div>
         </div>
       </div>
-      <div class="map-frame reveal">
-        <iframe
-          src="https://www.google.com/maps?q=Via%20Corredor%20Rio%20Frio%20Calle%20210%20%239-631%20Floridablanca%20Santander%20Colombia&output=embed"
-          allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-          title="Ubicación de Transcarnes SAS"></iframe>
+      <div class="contact-form-card reveal">
+        <h3>Envíanos un mensaje</h3>
+        <p>Completa el formulario y se abrirá tu correo con el mensaje listo para enviar a <strong>comercial@transcarnes.com</strong>.</p>
+        <form id="contactForm" novalidate>
+          <div class="form-row">
+            <label for="cfName">Nombre</label>
+            <input type="text" id="cfName" name="name" required placeholder="Tu nombre">
+          </div>
+          <div class="form-row">
+            <label for="cfEmail">Correo electrónico</label>
+            <input type="email" id="cfEmail" name="email" required placeholder="tucorreo@ejemplo.com">
+          </div>
+          <div class="form-row">
+            <label for="cfSubject">Asunto</label>
+            <select id="cfSubject" name="subject">
+              <option value="Cotización de transporte">Cotización de transporte</option>
+              <option value="Manifiesto o remesa">Manifiesto o remesa</option>
+              <option value="PQRS">PQRS</option>
+              <option value="Otro">Otro</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="cfMessage">Mensaje</label>
+            <textarea id="cfMessage" name="message" rows="4" required placeholder="Cuéntanos qué necesitas..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Enviar mensaje</button>
+          <p class="form-note">Se abrirá tu aplicación de correo predeterminada con el mensaje ya redactado.</p>
+        </form>
       </div>
+    </div>
+    <div class="map-frame reveal">
+      <iframe
+        src="https://www.google.com/maps?q=Via%20Corredor%20Rio%20Frio%20Calle%20210%20%239-631%20Floridablanca%20Santander%20Colombia&output=embed"
+        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Ubicación de Transcarnes SAS"></iframe>
     </div>
   </div>
 </section>
