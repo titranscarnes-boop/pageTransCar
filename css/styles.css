@@ -286,6 +286,101 @@ input:focus-visible {
 .service-card h3 { font-size: 1.2rem; }
 .service-card p { color: var(--gray-700); font-size: .96rem; margin-bottom: 0; }
 
+.service-card-clickable { cursor: pointer; }
+.service-card-clickable:focus-visible { outline: 3px solid var(--red); outline-offset: 3px; }
+.service-card-hint {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: .82rem;
+  font-weight: 700;
+  color: var(--red);
+  text-transform: uppercase;
+  letter-spacing: .03em;
+}
+
+/* ---------- Lightbox ---------- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lightbox[hidden] { display: none; }
+.lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 11, 15, .88);
+}
+.lightbox-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  max-width: min(92vw, 900px);
+  padding: 0 16px;
+}
+.lightbox-figure {
+  margin: 0;
+  background: var(--dark-2);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  max-width: 100%;
+}
+.lightbox-figure img {
+  display: block;
+  width: 100%;
+  max-height: 72vh;
+  object-fit: contain;
+  background: var(--dark-2);
+}
+.lightbox-figure figcaption {
+  padding: 14px 20px;
+  color: var(--white);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  text-align: center;
+}
+.lightbox-close {
+  position: absolute;
+  top: -48px;
+  right: 0;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,.12);
+  color: var(--white);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.lightbox-close:hover { background: rgba(255,255,255,.24); }
+.lightbox-nav {
+  flex-shrink: 0;
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,.12);
+  color: var(--white);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.lightbox-nav:hover { background: var(--red); }
+
+@media (max-width: 640px) {
+  .lightbox-content { flex-direction: column; gap: 12px; }
+  .lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); }
+  .lightbox-prev { left: 4px; }
+  .lightbox-next { right: 4px; }
+  .lightbox-close { top: -44px; }
+}
+
 /* ---------- About / Nosotros ---------- */
 .about-grid {
   display: grid;
