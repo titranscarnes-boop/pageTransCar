@@ -43,6 +43,30 @@ a { text-decoration: none; color: inherit; }
 ul { list-style: none; margin: 0; padding: 0; }
 img { max-width: 100%; height: auto; display: block; }
 
+/* ---------- Accesibilidad ---------- */
+.skip-link {
+  position: absolute;
+  top: -60px;
+  left: 16px;
+  z-index: 2000;
+  background: var(--red);
+  color: var(--white);
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: top .2s ease;
+}
+.skip-link:focus {
+  top: 16px;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--red);
+  outline-offset: 2px;
+}
+
 .container {
   width: 100%;
   max-width: 1180px;
@@ -448,6 +472,13 @@ img { max-width: 100%; height: auto; display: block; }
   .nav-links.open { transform: translateX(0); box-shadow: var(--shadow-lg); }
   .nav-links a { padding: 14px 18px; }
   .nav-toggle { display: flex; }
+  .nav-backdrop {
+    position: fixed; inset: 0; z-index: 999;
+    background: rgba(10, 11, 15, .55);
+    opacity: 0; pointer-events: none;
+    transition: opacity var(--transition);
+  }
+  .nav-backdrop.open { opacity: 1; pointer-events: auto; }
   .section { padding: 64px 0; }
   .services-grid, .team-grid { grid-template-columns: 1fr 1fr; }
   .highlights { grid-template-columns: 1fr 1fr; margin-top: 24px; }
