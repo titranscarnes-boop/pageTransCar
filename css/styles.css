@@ -342,6 +342,20 @@ input:focus-visible {
 .team-info h4 { font-size: .92rem; margin-bottom: 4px; }
 .team-info span { font-size: .74rem; color: var(--red); font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
 
+.team-photo-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--dark) 0%, var(--red-dark) 130%);
+}
+.team-photo-placeholder span {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 1.9rem;
+  letter-spacing: .04em;
+  color: var(--white);
+}
+
 /* ---------- CTA banner ---------- */
 .cta-banner {
   background: linear-gradient(120deg, var(--dark) 0%, var(--dark-2) 60%, var(--red-dark) 130%);
