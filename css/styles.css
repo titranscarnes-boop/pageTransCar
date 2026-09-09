@@ -431,7 +431,7 @@ input:focus-visible {
 }
 .team-card:hover { box-shadow: var(--shadow-md); transform: translateY(-6px); }
 .team-photo { aspect-ratio: 1 / 1; overflow: hidden; background: var(--gray-100); }
-.team-photo img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
+.team-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 15%; transition: var(--transition); }
 .team-card:hover .team-photo img { transform: scale(1.08); }
 .team-info { padding: 18px 12px 22px; }
 .team-info h4 { font-size: .92rem; margin-bottom: 4px; }
