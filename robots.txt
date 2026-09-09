@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://titranscarnes-boop.github.io/pageTransCar/sitemap.xml
+Sitemap: https://opltranscarnes.com/sitemap.xml
