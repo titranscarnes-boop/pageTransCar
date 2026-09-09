@@ -415,12 +415,23 @@ input:focus-visible {
 }
 .about-actions { margin-top: 32px; }
 
-/* ---------- Team ---------- */
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 24px;
+/* ---------- Team (organigrama) ---------- */
+.org-chart {
+  background-image: radial-gradient(var(--gray-200) 1.5px, transparent 1.5px);
+  background-size: 26px 26px;
+  border-radius: var(--radius);
+  padding: 48px 20px;
 }
+.org-tier {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 28px;
+}
+.org-tier-1 { margin-bottom: 48px; }
+.org-tier-2 { margin-bottom: 48px; }
+.org-tier .team-card { width: 190px; flex: 0 0 auto; }
+
 .team-card {
   background: var(--white);
   border-radius: var(--radius);
@@ -613,7 +624,7 @@ input:focus-visible {
 /* ---------- Responsive ---------- */
 @media (max-width: 980px) {
   .services-grid { grid-template-columns: repeat(2, 1fr); }
-  .team-grid { grid-template-columns: repeat(3, 1fr); }
+  .org-tier .team-card { width: 160px; }
   .about-grid, .contact-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .highlights { grid-template-columns: repeat(2, 1fr); }
@@ -635,7 +646,11 @@ input:focus-visible {
   }
   .nav-backdrop.open { opacity: 1; pointer-events: auto; }
   .section { padding: 64px 0; }
-  .services-grid, .team-grid { grid-template-columns: 1fr 1fr; }
+  .services-grid { grid-template-columns: 1fr 1fr; }
+  .org-chart { padding: 32px 12px; }
+  .org-tier { gap: 18px; }
+  .org-tier-1, .org-tier-2 { margin-bottom: 32px; }
+  .org-tier .team-card { width: 140px; }
   .highlights { grid-template-columns: 1fr 1fr; margin-top: 24px; }
   .highlight-item { border-right: none; border-bottom: 1px solid var(--gray-200); }
   .cta-banner { padding: 36px 28px; }
@@ -643,6 +658,6 @@ input:focus-visible {
 }
 
 @media (max-width: 520px) {
-  .team-grid { grid-template-columns: 1fr 1fr; }
+  .org-tier .team-card { width: 42%; }
   .hero-content { padding-top: 120px; }
 }
