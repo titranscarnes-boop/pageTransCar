@@ -311,8 +311,12 @@
       </div>
       <div class="contact-form-card reveal">
         <h3>Envíanos un mensaje</h3>
-        <p>Completa el formulario y se abrirá tu correo con el mensaje listo para enviar a <strong>comercial@transcarnes.com</strong>.</p>
+        <p>Completa el formulario y te contactaremos a la brevedad a <strong>comercial@transcarnes.com</strong>.</p>
         <form id="contactForm" novalidate>
+          <div class="form-row" style="position:absolute; left:-9999px;" aria-hidden="true">
+            <label for="cfWebsite">No llenar este campo</label>
+            <input type="text" id="cfWebsite" name="website" tabindex="-1" autocomplete="off">
+          </div>
           <div class="form-row">
             <label for="cfName">Nombre</label>
             <input type="text" id="cfName" name="name" required placeholder="Tu nombre">
@@ -335,7 +339,7 @@
             <textarea id="cfMessage" name="message" rows="4" required placeholder="Cuéntanos qué necesitas..."></textarea>
           </div>
           <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Enviar mensaje</button>
-          <p class="form-note">Se abrirá tu aplicación de correo predeterminada con el mensaje ya redactado.</p>
+          <p class="form-note" id="formNote"></p>
         </form>
       </div>
     </div>

@@ -109,10 +109,14 @@ document.addEventListener('DOMContentLoaded', function () {
   startSlider();
 
   /* ---- Lightbox: flota refrigerada (NPR, FVR, FVZ) ---- */
+  // El "?v=" es para forzar a que el navegador y el CDN carguen la
+  // imagen nueva cuando se reemplace el archivo. Súbela y luego sube
+  // este número en 1 cada vez que cambies alguna de estas 3 fotos.
+  var FLEET_IMG_VERSION = 2;
   var refrigeradoImages = [
-    { src: 'assets/img/refrigerado/npr.png', label: 'Isuzu NPR' },
-    { src: 'assets/img/refrigerado/fvr.png', label: 'Isuzu FVR' },
-    { src: 'assets/img/refrigerado/fvz.png', label: 'Isuzu FVZ' }
+    { src: 'assets/img/refrigerado/npr.jpg?v=' + FLEET_IMG_VERSION, label: 'Isuzu NPR' },
+    { src: 'assets/img/refrigerado/fvr.jpg?v=' + FLEET_IMG_VERSION, label: 'Isuzu FVR' },
+    { src: 'assets/img/refrigerado/fvz.jpg?v=' + FLEET_IMG_VERSION, label: 'Isuzu FVZ' }
   ];
   var cardRefrigerado = document.getElementById('cardRefrigerado');
   var lightbox = document.getElementById('lightbox');
@@ -166,9 +170,21 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  /* ---- Formulario de contacto (abre el correo con el mensaje listo) ---- */
+  /* ---- Formulario de contacto (envío real vía contact.php) ---- */
   var contactForm = document.getElementById('contactForm');
+  var formNote = document.getElementById('formNote');
+
   if (contactForm) {
+    var submitBtn = contactForm.querySelector('button[type="submit"]');
+    var submitBtnDefaultText = submitBtn ? submitBtn.textContent : '';
+
+    function setFormNote(text, kind) {
+      if (!formNote) return;
+      formNote.textContent = text;
+      formNote.classList.remove('form-note-ok', 'form-note-error');
+      if (kind) formNote.classList.add('form-note-' + kind);
+    }
+
     contactForm.addEventListener('submit', function (e) {
       e.preventDefault();
 
@@ -176,20 +192,45 @@ document.addEventListener('DOMContentLoaded', function () {
       var email = document.getElementById('cfEmail').value.trim();
       var subject = document.getElementById('cfSubject').value;
       var message = document.getElementById('cfMessage').value.trim();
+      var website = document.getElementById('cfWebsite') ? document.getElementById('cfWebsite').value : '';
 
-      if (!name || !email || !message) return;
+      if (!name || !email || !message) {
+        setFormNote('Por favor completa todos los campos.', 'error');
+        return;
+      }
 
-      var body =
-        'Nombre: ' + name + '\n' +
-        'Correo: ' + email + '\n\n' +
-        message;
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Enviando...';
+      }
+      setFormNote('Enviando tu mensaje...', null);
 
-      var mailtoUrl =
-        'mailto:comercial@transcarnes.com' +
-        '?subject=' + encodeURIComponent(subject + ' - ' + name) +
-        '&body=' + encodeURIComponent(body);
+      var formData = new FormData();
+      formData.append('name', name);
+      formData.append('email', email);
+      formData.append('subject', subject);
+      formData.append('message', message);
+      formData.append('website', website); // honeypot
 
-      window.location.href = mailtoUrl;
+      fetch('contact.php', { method: 'POST', body: formData })
+        .then(function (res) { return res.json().catch(function () { return { ok: false }; }); })
+        .then(function (data) {
+          if (data.ok) {
+            setFormNote(data.message || 'Gracias por tu mensaje. Te contactaremos pronto.', 'ok');
+            contactForm.reset();
+          } else {
+            setFormNote(data.message || 'No se pudo enviar tu mensaje. Intenta de nuevo o escríbenos a comercial@transcarnes.com.', 'error');
+          }
+        })
+        .catch(function () {
+          setFormNote('No se pudo enviar tu mensaje. Intenta de nuevo o escríbenos a comercial@transcarnes.com.', 'error');
+        })
+        .finally(function () {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = submitBtnDefaultText;
+          }
+        });
     });
   }
 

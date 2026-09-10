@@ -548,6 +548,8 @@ input:focus-visible {
   color: var(--gray-500);
   text-align: center;
 }
+.form-note-ok { color: #1a7f37; font-weight: 600; }
+.form-note-error { color: #c0272d; font-weight: 600; }
 
 .map-frame {
   margin-top: 32px;
